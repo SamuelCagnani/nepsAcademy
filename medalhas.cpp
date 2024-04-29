@@ -1,27 +1,23 @@
 #include <iostream>
-#include <vector>
+#include <array>
 #include <algorithm>
 
 using namespace std;
 
 int main() {
 
-    int n1, n2, n3;
+    array<pair <int, int>, 3> numeros;
 
-    cin >> n1 >> n2 >> n3;
+    for(int i = 0; i < 3; i++) {
+        cin >> numeros[i].first;
+        numeros[i].second = i + 1;
+    }
 
-    if(n1 < n2 && n1 < n3) {
-        if(n2 < n3) cout << "1" << endl << "2" << endl << "3" << endl;
-        else cout << "1" << endl << "3" << endl << "2" << endl;
-    }
-    else if(n2 < n1 && n2 < n3) {
-        if(n1 < n3) cout << "2" << endl << "1" << endl << "3" << endl;
-        else cout << "2" << endl << "3" << endl << "1" << endl;
-    }
-    else {
-        if(n1 < n2) cout << "3" << endl << "1" << endl << "2" << endl;
-        else cout << "3" << endl << "2" << endl << "1" << endl;
-    }
+    sort(numeros.begin(), numeros.end(), [](const pair<int, int> &a, const pair<int, int> &b) {
+        return a.first < b.first;
+    });
+
+    for(const auto& p : numeros) cout << p.second << endl;
 
     return 0;
 }
